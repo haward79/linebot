@@ -50,8 +50,6 @@ def get_rain_info() -> tuple:
                 if will_it_rain_hourly[i] == 1:
                     time_set.append(i)
 
-            print(time_set)
-
             i = 0
             while i < len(time_set):
                 start = i
@@ -89,4 +87,4 @@ def get_rain_info() -> tuple:
             return (text, chart)
 
     else:
-        log('Failed to fetch data. Http status code is {}.'.format(resp.status_code), LogType.ERROR)
+        log('Failed to fetch weather data. Http status code is {}.'.format(resp.status_code), LogType.ERROR)
