@@ -2,13 +2,14 @@
 from time import sleep
 import numpy as np
 from selenium import webdriver
+import html
 from log import *
 
 
 def get_mini_info() -> tuple:
 
     text = ''
-    image = None
+    image_url = None
 
     firefoxOptions = webdriver.FirefoxOptions()
     firefoxOptions.add_argument('-headless')
@@ -26,7 +27,14 @@ def get_mini_info() -> tuple:
         text = source_code[pos:end_pos+4]
         text = text.replace('＂', '').replace('"', '').replace("'", '')
 
+        # Fetch image url.
+        pos = source_code.find('https://scontent-tpe1-1.xx.fbcdn.net/', end_pos+4)
+        end_pos = source_code.find('"', pos)
+
+        if pos != -1 and end_pos != -1:
+            image_url = html.unescape(source_code[pos:end_pos])
+
     else:
         log('Failed to fetch info for mini daily drink.', LogType.ERROR)
 
-    return (text, image)
+    return (text, image_url)

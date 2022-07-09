@@ -10,7 +10,7 @@ messages = []
 
 def rain_alert():
 
-    global  messages
+    global messages
 
     (text, chart) = get_rain_info()
 
@@ -19,15 +19,20 @@ def rain_alert():
     else:
         messages = linebot.append_message(linebot.create_text_message('今天全日無雨 ^_^'), messages)
 
+    messages = linebot.append_message(linebot.create_image_message(chart), messages)
+
 
 def mini_notify():
 
     global messages
 
-    (text, image) = get_mini_info()
+    (text, image_url) = get_mini_info()
 
     if len(text) > 0:
         messages = linebot.append_message(linebot.create_text_message('米里Mini 今日優惠\n' + text), messages)
+
+        if image_url is not None:
+            messages = linebot.append_message(linebot.create_image_message(image_url), messages)
     else:
         messages = linebot.append_message(linebot.create_text_message('無法取得米里Mini今天的優惠資訊。'), messages)
 
