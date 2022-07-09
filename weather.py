@@ -72,7 +72,7 @@ def get_rain_info() -> tuple:
                 text += '今天 ' + period + ' 會有降雨，請留意天氣狀況並攜帶雨具。\n'
 
             if len(text) > 0:
-                text = '茄萣地區降雨概況如下：' + text
+                text = '今天茄萣地區降雨概況如下：\n' + text
 
             fig, ax = plt.subplots()
 
